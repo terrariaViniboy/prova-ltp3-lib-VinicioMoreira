@@ -56,7 +56,7 @@ class LivroController extends Controller
      */
     public function show(Livro $livro)
     {
-        //
+        
     }
 
     /**
@@ -67,7 +67,8 @@ class LivroController extends Controller
      */
     public function edit(Livro $livro)
     {
-        //
+        $autores = Autor::all(); 
+        return view('livros.edit', compact('livro', 'autores'));
     }
 
     /**
@@ -97,6 +98,7 @@ class LivroController extends Controller
      */
     public function destroy(Livro $livro)
     {
-        //
+        $livro->delete();
+        return redirect()->route('livros.index')->with('success', 'Livro excluído!');
     }
 }

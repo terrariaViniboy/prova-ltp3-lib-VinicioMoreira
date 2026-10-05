@@ -25,7 +25,7 @@ class AutorController extends Controller
      */
     public function create()
     {
-        //
+        return view('autores.create');
     }
 
     /**
@@ -52,7 +52,7 @@ class AutorController extends Controller
      */
     public function show(Autor $autor)
     {
-        //
+        
     }
 
     /**
@@ -63,7 +63,7 @@ class AutorController extends Controller
      */
     public function edit(Autor $autor)
     {
-        //
+        return view('autores.edit', compact('autor'));
     }
 
     /**
@@ -75,7 +75,15 @@ class AutorController extends Controller
      */
     public function update(Request $request, Autor $autor)
     {
-        //
+    $validated = $request->validate([
+        'nome' => 'required|string|max:255',
+        'nacionalidade' => 'required|string|max:255',
+    ]);
+
+    $autor->update($validated);
+
+    return redirect()->route('autores.index')
+                     ->with('success', 'Autor atualizado com sucesso!');
     }
 
     /**

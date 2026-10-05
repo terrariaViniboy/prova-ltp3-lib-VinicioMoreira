@@ -1,3 +1,5 @@
+<?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,10 +10,8 @@ class Livro extends Model
     use HasFactory;
 
     protected $table = 'livros';
-    
     protected $fillable = ['titulo', 'ano_publicacao', 'isbn', 'autor_id'];
 
-    // Relacionamento: Um livro pertence a um autor
     public function autor()
     {
         return $this->belongsTo(Autor::class);
