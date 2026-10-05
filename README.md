@@ -16,7 +16,9 @@ Desenvolver um CRUD (Create, Read, Update, Delete) seguindo a arquitetura **MVC*
 A prova é composta por **5 etapas**. Em cada etapa você deve:
 
 1. **Implementar** o que é pedido;
+    
 2. **Responder** às questões "Como criar?" e "Como funciona?" no espaço indicado neste README.
+   
 
 > Exemplo de resposta esperada:
 > *"A model é criada através do CLI do Laravel executando um comando. Logo a model irá representar a tabela do banco de uma forma abstrata, portanto é importante definir quais são as colunas."*
@@ -157,13 +159,14 @@ erDiagram
 **Q1.1 — Como criar uma model no Laravel?**
 
 > _Resposta:_
->
+>*"A model é criada através do Artisan CLI utilizando o comando php artisan make:model NomeDaModel no terminal. Para otimizar, podemos adicionar flags como -m para já gerar a migration correspondente."*
 >
 
 **Q1.2 — Como funciona uma model? Explique o papel das propriedades `$table` e `$fillable` e dos relacionamentos `hasMany` / `belongsTo`.**
 
 > _Resposta:_
->
+> *"A Model no padrão MVC é a camada responsável por representar uma tabela do banco de dados de forma abstrata e lidar com as regras de negócio. A propriedade $table indica explicitamente qual tabela do banco aquela model representa. A propriedade $fillable define quais colunas podem ser preenchidas via atribuição em massa (mass assignment), protegendo o banco contra inserções indevidas. Os métodos hasMany (tem muitos) e belongsTo (pertence a) definem os relacionamentos entre as tabelas, permitindo buscar dados relacionados de forma orientada a objetos (ex: um autor tem vários livros, e um livro pertence a um único autor)"*
+
 >
 
 ---
@@ -181,13 +184,13 @@ Confira no MySQL se as tabelas `autores` e `livros` foram criadas.
 **Q2.1 — Como criar uma migration e aplicá-la no banco de dados?**
 
 > _Resposta:_
->
+>*"Uma migration é criada com o comando php artisan make:migration nome_da_migration. Para aplicá-la ao banco de dados e efetivamente criar/alterar as tabelas, utilizamos o comando php artisan migrate."*
 >
 
 **Q2.2 — Como funciona uma migration? Explique os métodos `up()` e `down()`, a importância da ordem de execução e o que faz `foreignId(...)->constrained(...)`.**
 
 > _Resposta:_
->
+>*"Migrations funcionam como um controle de versão para o banco de dados. O método up() é utilizado para criar ou modificar tabelas (ações de avanço), enquanto o método down() serve para reverter o que foi feito no up() (ações de rollback). A ordem de execução é crucial porque uma tabela que contém chave estrangeira (como livros) só pode ser criada após a tabela de origem (como autores) já existir no banco. O comando foreignId(...)->constrained(...) cria uma coluna do tipo BigInt para armazenar a chave estrangeira e automaticamente adiciona a restrição (constraint) referenciando a tabela pai, garantindo a integridade relacional."*
 >
 
 ---
@@ -247,19 +250,19 @@ Confira no MySQL se as tabelas `autores` e `livros` foram criadas.
 **Q3.1 — Como criar um controller? Qual a diferença de usar as opções `--resource` e `--model`?**
 
 > _Resposta:_
->
+>*"É criado através do comando php artisan make:controller NomeController. A flag --resource gera automaticamente os métodos padrão de um CRUD (index, create, store, show, edit, update, destroy). A flag --model=NomeDaModel vincula o controller a uma Model específica, injetando essa model automaticamente nos métodos, o que habilita o uso imediato de Route Model Binding."*
 >
 
 **Q3.2 — Como funciona um controller dentro da arquitetura MVC? Explique a comunicação entre Model, View e Controller e o que é o *Route Model Binding* (ex.: receber `Autor $autor` no método).**
 
 > _Resposta:_
->
+>*"O Controller é o "cérebro" que orquestra a aplicação. Ele recebe as requisições HTTP (via Rotas), processa a lógica solicitando dados à Model e entrega o resultado final chamando uma View. O Route Model Binding é um recurso do Laravel que, ao receber o ID de um recurso na rota, injeta automaticamente a instância correspondente da Model diretamente no método do Controller, dispensando consultas manuais como Model::find($id)"*
 >
 
 **Q3.3 — Como funciona o `$request->validate()`? O que acontece quando a validação falha e quando ela passa?**
 
 > _Resposta:_
->
+>*"Ele verifica se os dados enviados pelo usuário atendem às regras definidas no array. Se a validação falha, o Laravel interrompe a execução, cria mensagens de erro e redireciona o usuário automaticamente de volta para a página anterior com os dados preenchidos (old input) e os erros na sessão. Se passa, ele retorna um array com os dados já validados prontos para serem salvos no banco de dados."*
 >
 
 ---
@@ -294,13 +297,13 @@ Confira no MySQL se as tabelas `autores` e `livros` foram criadas.
 **Q4.1 — Como criar as rotas de um CRUD no Laravel? Quais rotas o `Route::resource` gera (método HTTP, URI, ação e nome)?**
 
 > _Resposta:_
->
+>*"Para criar as rotas, basta colocar Route::resource('nome_recurso', Controller::class) no ficheiro web.php. A grande vantagem é que esta única linha já gera automaticamente as sete rotas base de um CRUD (index, create, store, show, edit, update e destroy), associando de imediato os métodos HTTP corretos (GET, POST, PUT/PATCH e DELETE) aos respetivos caminhos na aplicação"*
 >
 
 **Q4.2 — Como funciona o sistema de rotas? Explique o caminho de uma requisição desde a URL até o controller e a utilidade das rotas nomeadas (`route('autores.index')`).**
 
 > _Resposta:_
->
+>*"Quando o usuário acessa uma URL, o sistema de rotas (Router) captura a requisição HTTP (GET, POST, etc.) e a encaminha para o método específico correspondente no Controller responsável por tratá-la. Rotas nomeadas (ex: route('autores.index')) são extremamente úteis porque permitem criar links no código abstraindo a URL real; se a URL da rota mudar no futuro, os links na aplicação continuam funcionando normalmente sem precisar alterar o HTML."*
 >
 
 ---
