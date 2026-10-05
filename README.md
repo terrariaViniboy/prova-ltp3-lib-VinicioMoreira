@@ -346,27 +346,27 @@ Crie as quatro views abaixo. Todas devem estender o layout base com `@extends('l
 **Q5.1 — Como criar um formulário Blade para cadastro e para edição? Por que o formulário de edição precisa de `@method('PUT')` e para que serve o `@csrf`?**
 
 > _Resposta:_
->
+>*"Montamos as views dos formulários usando @extends e @section no layout base. Na edição, precisamos do @method('PUT') porque os navegadores só entendem GET e POST, então ele avisa o Laravel para tratar a requisição como PUT. Além disso, sempre usamos o @csrf para gerar o token de segurança e proteger a aplicação contra ataques."*
 >
 
 **Q5.2 — Como funciona a exibição dos erros de validação e a manutenção dos dados digitados? Explique `$errors`, `@error` e `old()`.**
 
 > _Resposta:_
->
+>*"Montamos as views dos formulários usando @extends e @section no layout base. Na edição, precisamos do @method('PUT') porque os navegadores só entendem GET e POST, então ele avisa o Laravel para tratar a requisição como PUT. Além disso, sempre usamos o @csrf para gerar o token de segurança e proteger a aplicação contra ataques."*
 >
 
 ---
 
 ## Checklist de entrega
 
-- [ ] Models `Autor` e `Livro` com `$fillable` e relacionamentos
-- [ ] Migrations de `autores` e `livros` executadas com chave estrangeira
-- [ ] `AutorController` e `LivroController` com `index`, `create`, `store`, `edit`, `update`, `destroy`
-- [ ] Validações com `$request->validate()` em `store` e `update`
-- [ ] Rotas `resource` registradas e nomeadas corretamente
-- [ ] Views `create` e `edit` de autores e livros
-- [ ] Mensagens de erro e de sucesso exibidas
-- [ ] Todas as questões (Q1.1 a Q5.2) respondidas neste README
+- [x] Models `Autor` e `Livro` com `$fillable` e relacionamentos
+- [x] Migrations de `autores` e `livros` executadas com chave estrangeira
+- [x] `AutorController` e `LivroController` com `index`, `create`, `store`, `edit`, `update`, `destroy`
+- [x] Validações com `$request->validate()` em `store` e `update`
+- [x] Rotas `resource` registradas e nomeadas corretamente
+- [x] Views `create` e `edit` de autores e livros
+- [x] Mensagens de erro e de sucesso exibidas
+- [x] Todas as questões (Q1.1 a Q5.2) respondidas neste README
 
 
 ## Licença
